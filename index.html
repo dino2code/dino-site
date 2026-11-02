@@ -159,20 +159,15 @@ footer a:hover{color:var(--amber)}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
 
-/* sound field: faint rings sitting on the line where "how I work" begins (JS sets top) */
-.field{position:absolute;left:0;right:0;top:0;height:760px;margin-top:-380px;z-index:-1;pointer-events:none;overflow:hidden}
-.field i{position:absolute;inset:0}
-.field .rings{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 41px,rgba(247,238,230,.07) 42px,transparent 43px);-webkit-mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%);mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%)}
-.field .core{background:radial-gradient(circle 150px at 50% 50%,rgba(212,255,58,.08),transparent)}
-.field u{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border-radius:50%;border:1px solid rgba(212,255,58,.4);animation:pulse 5s cubic-bezier(.2,.7,.2,1) infinite}
-.field u.two{animation-delay:2.5s}
-@keyframes pulse{from{transform:scale(1);opacity:.8}to{transform:scale(7.5);opacity:0}}
-@media (prefers-reduced-motion:reduce){.field u{animation:none;opacity:0}}
+/* sound field: a canvas band sitting on the line where "how I work" begins (JS sets top) */
+.field{position:absolute;left:0;right:0;top:0;height:440px;margin-top:-250px;z-index:-1;pointer-events:none;overflow:hidden;
+  -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+.field canvas{display:block;width:100%;height:100%}
 </style>
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="field" aria-hidden="true"><i class="core"></i><i class="rings"></i><u></u><u class="two"></u></div>
+<div class="field" aria-hidden="true"><canvas></canvas></div>
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#top" dir="ltr">DINO<i>.</i></a>
@@ -420,5 +415,48 @@ footer a:hover{color:var(--amber)}
 })();
 </script>
 
+<script>
+/* sound field drawing: a breathing amber orb, thin light ribbons passing through it */
+function draw(x,W,H,t){
+  x.clearRect(0,0,W,H);
+  var cx=W/2,cy=H/2,r=Math.min(H*.2,80)*(1+.07*Math.sin(t*1.6));
+  x.globalCompositeOperation='lighter';
+  var g=x.createRadialGradient(cx,cy,0,cx,cy,r*2.6);
+  g.addColorStop(0,'rgba(255,200,130,.55)');g.addColorStop(.35,'rgba(255,180,94,.22)');g.addColorStop(1,'rgba(255,180,94,0)');
+  x.fillStyle=g;x.beginPath();x.arc(cx,cy,r*2.6,0,7);x.fill();
+  g=x.createRadialGradient(cx,cy,0,cx,cy,r*.7);
+  g.addColorStop(0,'rgba(240,255,190,.5)');g.addColorStop(1,'rgba(212,255,58,0)');
+  x.fillStyle=g;x.beginPath();x.arc(cx,cy,r*.7,0,7);x.fill();
+  var cols=['212,255,58','255,180,94','200,170,255'],N=9;
+  for(var i=0;i<N;i++){
+    var col=cols[i%3],p=i*1.9,A=H*(.16+.1*((i*7)%3)/2);
+    var s=x.createLinearGradient(0,0,W,0);
+    s.addColorStop(0,'rgba('+col+',0)');s.addColorStop(.5,'rgba('+col+',.55)');s.addColorStop(1,'rgba('+col+',0)');
+    x.strokeStyle=s;x.lineWidth=1.1;x.shadowBlur=8;x.shadowColor='rgba('+col+',.8)';
+    x.beginPath();
+    for(var X=0;X<=W;X+=6){
+      var u=X/W,env=.2+.8*Math.pow(Math.sin(Math.PI*u),2);
+      var y=cy+env*A*(Math.sin(u*6+t*.9+p)*.7+Math.sin(u*13-t*1.3+p*1.7)*.3);
+      X?x.lineTo(X,y):x.moveTo(X,y);
+    }
+    x.stroke();
+    var su=(t*.05*(1+i*.12)+i*.11)%1,sx=su*W,se=.2+.8*Math.pow(Math.sin(Math.PI*su),2);
+    var sy=cy+se*A*(Math.sin(su*6+t*.9+p)*.7+Math.sin(su*13-t*1.3+p*1.7)*.3);
+    x.shadowBlur=10;x.fillStyle='rgba(255,255,255,'+(.9*Math.sin(Math.PI*su))+')';x.beginPath();x.arc(sx,sy,1.6,0,7);x.fill();
+  }
+  x.shadowBlur=0;x.globalCompositeOperation='source-over';
+}
+/* sound field canvas: sized to its box, paused off-screen, one still frame for reduced motion */
+(function(){
+  var c=document.querySelector('.field canvas');if(!c)return;
+  var x=c.getContext('2d'),W=0,H=0,on=true,raf=0;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){var d=Math.min(window.devicePixelRatio||1,2);W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)}
+  function loop(ms){draw(x,W,H,ms/1000);raf=(on&&!still)?requestAnimationFrame(loop):0}
+  size();addEventListener('resize',function(){size();if(still)draw(x,W,H,2)});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){on=e[0].isIntersecting;if(on&&!raf&&!still)raf=requestAnimationFrame(loop)}).observe(c);
+  if(still)draw(x,W,H,2);else raf=requestAnimationFrame(loop);
+})();
+</script>
 </body>
 </html>
