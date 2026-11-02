@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="דין שגב (DINO) – טכנאי סאונד להופעות חיות, FOH ומוניטורים. מרצה להגברה ואודיו.">
 <title>DINO · דין שגב</title>
-<script>try{var l=localStorage.getItem('dino-lang');document.documentElement.lang=l==='en'?'en':'he';document.documentElement.dir=l==='en'?'ltr':'rtl';}catch(e){document.documentElement.dir='rtl';document.documentElement.lang='he';}</script>
+<script>document.documentElement.classList.add('js');try{var l=localStorage.getItem('dino-lang');document.documentElement.lang=l==='en'?'en':'he';document.documentElement.dir=l==='en'?'ltr':'rtl';}catch(e){document.documentElement.dir='rtl';document.documentElement.lang='he';}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Rubik:wght@400;500&display=swap">
@@ -24,40 +24,59 @@
   --body:"Rubik","Segoe UI",Arial,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{background:var(--night);color:var(--paper);font-family:var(--body);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+/* film grain, keeps the dark from looking flat */
+body::after{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
 a{color:var(--amber);text-underline-offset:4px}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1040px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--night) 82%,transparent);backdrop-filter:blur(10px)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--night) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-bottom-color:var(--rule)}
 .top .wrap{display:flex;align-items:center;gap:28px;padding-block:14px}
 .mark{font-family:var(--display);font-weight:900;font-size:26px;color:var(--paper);text-decoration:none;line-height:1;letter-spacing:.02em}
+.mark i{font-style:normal;color:var(--amber)}
 .top nav{display:flex;gap:22px;margin-inline-start:auto}
-.top nav a{color:var(--dust);text-decoration:none;font-size:16px}
-.top nav a:hover{color:var(--paper)}
-.lang{font:inherit;font-size:15px;background:none;color:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:4px 14px;cursor:pointer}
+.top nav a{position:relative;color:var(--dust);text-decoration:none;font-size:16px;transition:color .2s}
+.top nav a::after{content:"";position:absolute;inset-inline:0;bottom:-4px;height:2px;border-radius:2px;background:var(--amber);transform:scaleX(0);transition:transform .25s ease}
+.top nav a:hover,.top nav a.on{color:var(--paper)}
+.top nav a.on::after{transform:scaleX(1)}
+.lang{font:inherit;font-size:15px;background:none;color:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:4px 14px;cursor:pointer;transition:border-color .2s}
 .lang:hover{border-color:var(--amber)}
-@media (max-width:720px){.top nav{display:none}.lang{margin-inline-start:auto}}
+/* phones: nav drops to its own scrollable row instead of disappearing */
+@media (max-width:720px){
+  .top .wrap{flex-wrap:wrap;row-gap:6px;padding-block:10px 0}
+  .lang{margin-inline-start:auto}
+  .top nav{order:3;flex-basis:100%;margin:0 -16px;padding:4px 16px 10px;gap:20px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+  .top nav::-webkit-scrollbar{display:none}
+  .top nav a{font-size:15px}
+}
 
 /* hero */
 .hero{position:relative;overflow:hidden;isolation:isolate}
 .hero::before{content:"";position:absolute;z-index:-1;inset:-30% -10% auto;height:120%;
-  background:radial-gradient(ellipse 42% 60% at 50% 0%,color-mix(in srgb,var(--amber) 26%,transparent),transparent 70%)}
+  background:radial-gradient(ellipse 42% 60% at 50% 0%,color-mix(in srgb,var(--amber) 26%,transparent),transparent 70%);
+  animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.78}}
 .hero .wrap{padding-block:72px 0;text-align:center}
+.hero h1{text-shadow:0 0 60px color-mix(in srgb,var(--amber) 22%,transparent)}
 .hero h1{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(92px,21vw,232px);line-height:.85;letter-spacing:-.01em}
 .hero .who{font-family:var(--display);font-weight:500;font-size:clamp(26px,4.4vw,38px);margin:14px 0 0}
 .hero .role{font-size:clamp(18px,2.2vw,21px);color:var(--dust);margin:16px auto 0;max-width:34ch;text-wrap:balance}
 .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-.btn{display:inline-block;font-weight:500;text-decoration:none;padding:13px 26px;border-radius:999px}
+.btn{display:inline-block;font-weight:500;text-decoration:none;padding:13px 26px;border-radius:999px;transition:background-color .2s,box-shadow .2s,transform .15s}
+.btn:active,button.send:active{transform:scale(.97)}
+.btn.solid{box-shadow:0 8px 30px -8px color-mix(in srgb,var(--amber) 55%,transparent)}
 .btn.solid{background:var(--amber);color:var(--amber-ink)}
 .btn.solid:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
 .btn.line{color:var(--paper);box-shadow:inset 0 0 0 1px var(--rule)}
 .btn.line:hover{box-shadow:inset 0 0 0 1px var(--amber)}
-#wave{display:block;width:100%;height:180px;margin-top:40px}
-@media (max-width:600px){#wave{height:120px}.hero .wrap{padding-block:52px 0}}
+#wave{display:block;width:min(100% - 32px,640px);aspect-ratio:317/170;height:auto;margin:32px auto 0}
+@media (max-width:600px){.hero .wrap{padding-block:52px 0}}
 
 /* sections */
 .sec .wrap{padding-block:88px}
@@ -67,9 +86,17 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,56px);l
 .kicker{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.4vw,44px);line-height:1.1;color:var(--amber);margin:-2px 0 20px;text-align:start}
 [dir="rtl"] .kicker{text-align:right}
 
+/* scroll reveal, only when JS has marked the page */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
 /* services: two-column list, no cards */
-.svc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
-.svc{padding-block:26px;border-top:1px solid var(--rule);min-width:0}
+.svc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;counter-reset:svc}
+.svc{position:relative;padding-block:26px;border-top:1px solid var(--rule);min-width:0;counter-increment:svc}
+.svc::before{content:"";position:absolute;top:-1px;inset-inline-start:0;width:0;height:2px;background:var(--amber);transition:width .45s ease}
+.svc:hover::before{width:64px}
+.svc::after{content:counter(svc,decimal-leading-zero);position:absolute;top:26px;inset-inline-end:0;font-family:var(--display);font-weight:500;font-size:15px;color:var(--rule);letter-spacing:.06em;transition:color .3s}
+.svc:hover::after{color:var(--amber)}
 .svc h3{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.2;margin:0 0 8px}
 .svc p{margin:0;color:var(--dust);max-width:44ch}
 .svc .pos{display:inline-block;font-size:19px;font-weight:500;color:var(--amber);margin-bottom:6px}
@@ -77,7 +104,9 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,56px);l
 
 /* how I work */
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
-.fact{min-width:0}
+.fact{min-width:0;padding-top:22px;border-top:2px solid var(--amber)}
+.fact:nth-child(2){border-top-color:color-mix(in srgb,var(--amber) 60%,var(--rule))}
+.fact:nth-child(3){border-top-color:color-mix(in srgb,var(--amber) 30%,var(--rule))}
 .fact b{display:block;font-family:var(--display);font-weight:700;font-size:24px;line-height:1.25;margin-bottom:6px}
 .fact span{color:var(--dust)}
 @media (max-width:760px){.facts{grid-template-columns:1fr;gap:28px}}
@@ -91,9 +120,12 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,56px);l
 .tools{list-style:none;padding:0;margin:0}
 .tools li{border-top:1px solid var(--rule)}
 .tools li:last-child{border-bottom:1px solid var(--rule)}
-.tools a{display:block;padding:16px 0;text-decoration:none;color:var(--paper)}
+.tools a{position:relative;display:block;padding:16px 0;padding-inline-end:36px;text-decoration:none;color:var(--paper)}
+.tools a::after{content:"↗";position:absolute;inset-inline-end:4px;top:50%;translate:0 -50%;color:var(--dust);font-size:20px;transition:color .2s,transform .25s}
+[dir="rtl"] .tools a::after{content:"↖"}
+.tools a:hover::after{color:var(--amber);transform:translateY(-3px)}
 .tools a:hover .t{color:var(--amber)}
-.tools .t{font-weight:500;display:block}
+.tools .t{font-weight:500;display:block;transition:color .2s}
 .tools .d{display:block;color:var(--dust);font-size:15px}
 
 /* contact */
@@ -104,10 +136,11 @@ form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-wid
 .full{grid-column:1/-1}
 @media (max-width:600px){form{grid-template-columns:1fr}}
 label{display:block;font-size:15px;color:var(--dust);margin-bottom:6px}
-input,textarea,select{width:100%;font:inherit;font-size:17px;color:var(--paper);background:var(--night);border:1px solid var(--rule);border-radius:12px;padding:12px 14px}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--amber)}
+input,textarea,select{width:100%;font:inherit;font-size:17px;color:var(--paper);background:var(--night);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px color-mix(in srgb,var(--amber) 16%,transparent)}
+input[aria-invalid="true"]{border-color:#ff7a6b}
 textarea{min-height:120px;resize:vertical}
-button.send{font:inherit;font-weight:500;background:var(--amber);color:var(--amber-ink);border:0;border-radius:999px;padding:13px 30px;cursor:pointer;justify-self:start}
+button.send{font:inherit;font-weight:500;background:var(--amber);color:var(--amber-ink);border:0;border-radius:999px;padding:13px 30px;cursor:pointer;justify-self:start;transition:background-color .2s,transform .15s}
 button.send:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
 .status{color:var(--amber);margin:0}
 .direct{margin-top:32px;display:flex;gap:32px;flex-wrap:wrap;color:var(--dust);font-size:16px}
@@ -116,15 +149,22 @@ button.send:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
 .direct a:hover strong{color:var(--amber)}
 
 footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--dust);text-decoration:none}
+footer a:hover{color:var(--amber)}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero::before{animation:none}
+  .js .rv{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{transition-duration:.01ms!important}
+}
 </style>
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#top">DINO</a>
+    <a class="mark" href="#top" dir="ltr">DINO<i>.</i></a>
     <nav aria-label="ניווט">
       <a href="#services" data-i="nav1">שירותים</a>
       <a href="#work" data-i="nav2">איך אני עובד</a>
@@ -223,6 +263,7 @@ footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;ju
         <div class="direct">
           <span><span data-i="d1">טלפון</span>: <a href="tel:+972547777223" dir="ltr"><strong>054-7777223</strong></a></span>
           <span><span data-i="d2">מייל</span>: <a href="mailto:dinsegev1@gmail.com" dir="ltr"><strong>dinsegev1@gmail.com</strong></a></span>
+          <span><a href="https://wa.me/972547777223" target="_blank" rel="noopener"><strong>WhatsApp</strong></a></span>
         </div>
       </div>
     </div>
@@ -232,36 +273,49 @@ footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;ju
 <footer>
   <div class="wrap">
     <span data-i="foot">דין שגב, טכנאי סאונד להופעות חיות, תל אביב</span>
-    <span>DINO</span>
+    <a href="#top" data-i="up">חזרה למעלה ↑</a>
   </div>
 </footer>
 
 <script>
 (function(){
-  /* waveform under the spotlight */
+  /* waveform under the spotlight: the same signal echoed back in depth, each ridge a moment earlier and further away */
   var cv=document.getElementById('wave'),ctx=cv.getContext('2d'),W=0,H=0,dpr=1;
   function size(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
-  var amber=getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()||'#ffb45e';
+  var css=getComputedStyle(document.documentElement);
+  var neon='#d4ff3a',night=css.getPropertyValue('--night').trim()||'#1b1521';
   function frame(t){
     ctx.clearRect(0,0,W,H);
-    var mid=H/2,n=Math.max(120,Math.floor(W/3));
-    for(var layer=0;layer<3;layer++){
-      ctx.beginPath();
+    var L=18,n=90,pts=[];
+    for(var l=L-1;l>=0;l--){
+      var z=l/(L-1),k=1-z*.6,                        /* z: 0 front … 1 back */
+          base=H*(.74-z*.5),amp=H*.3*k,inset=W*.14*z,tt=t-l*.11;
+      pts.length=0;
       for(var i=0;i<=n;i++){
-        var x=i/n*W,u=i/n;
-        var env=Math.pow(Math.sin(Math.PI*u),1.6);           /* fades at both edges */
-        var y=Math.sin(u*22+t*1.1+layer*.9)*.55+Math.sin(u*57-t*1.7+layer)*.3+Math.sin(u*9+t*.6)*.25;
-        var py=mid+y*env*(H*.36)*(1-layer*.28);
-        i?ctx.lineTo(x,py):ctx.moveTo(x,py);
+        var u=i/n,env=Math.pow(Math.sin(Math.PI*u),1.6);   /* fades at both edges */
+        var y=Math.sin(u*14+tt*3)*.6+Math.sin(u*31-tt*4.4)*.3+Math.sin(u*5+tt)*.25;
+        pts.push(inset+u*(W-2*inset),base-y*env*amp);
       }
-      ctx.strokeStyle=amber;ctx.globalAlpha=layer===0?.95:.28-layer*.06;ctx.lineWidth=layer===0?2:1.2;ctx.stroke();
+      /* occlude the ridges behind */
+      ctx.beginPath();ctx.moveTo(pts[0],pts[1]);
+      for(i=2;i<pts.length;i+=2)ctx.lineTo(pts[i],pts[i+1]);
+      ctx.lineTo(W-inset,H);ctx.lineTo(inset,H);ctx.closePath();
+      ctx.globalAlpha=1;ctx.shadowBlur=0;ctx.fillStyle=night;ctx.fill();
+      ctx.beginPath();ctx.moveTo(pts[0],pts[1]);
+      for(i=2;i<pts.length;i+=2)ctx.lineTo(pts[i],pts[i+1]);
+      var s=W/317;                                  /* scale strokes from the 317px card original */
+      ctx.strokeStyle=neon;ctx.lineWidth=(l===0?2.4:1.2-z*.5)*s;
+      ctx.globalAlpha=l===0?1:.55*(1-z)+.08;
+      if(l===0){ctx.shadowColor=neon;ctx.shadowBlur=16*s;}
+      ctx.stroke();
     }
-    ctx.globalAlpha=1;
+    ctx.globalAlpha=1;ctx.shadowBlur=0;
   }
-  size();frame(0);
+  /* start at t=1: the moment of the vocal-card original, first ridge rising */
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,last=1;
+  size();frame(last);
   if('ResizeObserver' in window)new ResizeObserver(function(){size();frame(last)}).observe(cv);
-  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,last=0;
-  if(!still){(function loop(ts){last=ts/1000;frame(last);requestAnimationFrame(loop);})(0);}
+  if(!still){(function loop(ts){last=1+ts/1000;frame(last);requestAnimationFrame(loop);})(0);}
 
   /* language */
   var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
@@ -282,11 +336,13 @@ footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;ju
     g3t:"Speaker delay calculator",g3d:"By distance, temperature and height, with a 3D view",g4d:"Checks the real quality of audio files",
     f_title:"Got a show?",f_lead:"Tell me about the production, the date and the venue, and I'll get back to you.",
     f1:"Name",f2:"Production or artist",f3:"Show date",f4:"Position",o1:"FOH",o2:"Monitors and IEMs",o3:"Both, or not sure yet",f5:"Venue",f6:"Details",f_send:"Send request",
-    d1:"Phone",d2:"Email",soon:"Coming soon",foot:"Din Segev, live sound engineer, Tel Aviv",
-    sent:"Thanks. The form isn't connected yet, so this request wasn't sent.",need:"Enter your name to send the request."};
+    d1:"Phone",d2:"Email",soon:"Coming soon",foot:"Din Segev, live sound engineer, Tel Aviv",up:"Back to top ↑",
+    sent:"Your email app should open with the details filled in. Just hit send.",need:"Enter your name to send the request.",
+    m_subj:"Show inquiry",m_name:"Name",m_prod:"Production / artist",m_date:"Date",m_role:"Position",m_venue:"Venue",m_msg:"Details"};
   var HE={};
   document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(!(k in HE))HE[k]=el.textContent;});
-  HE.sent="תודה. הטופס עדיין לא מחובר, ולכן הפנייה לא נשלחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
+  HE.sent="תוכנת המייל אמורה להיפתח עם כל הפרטים. נשאר רק ללחוץ שליחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
+  HE.m_subj="פנייה לגבי מופע";HE.m_name="שם";HE.m_prod="הפקה / אמן";HE.m_date="תאריך";HE.m_role="עמדה";HE.m_venue="מקום";HE.m_msg="פרטים";
   var lang='he';
   function apply(l){
     lang=l;var D=l==='en'?EN:HE;
@@ -300,12 +356,47 @@ footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;ju
   apply(saved==='en'?'en':'he');
   document.getElementById('langBtn').addEventListener('click',function(){apply(lang==='en'?'he':'en')});
 
-  /* form: not connected yet */
+  /* form: opens the visitor's mail app with the request filled in */
   document.getElementById('leadForm').addEventListener('submit',function(e){
-    e.preventDefault();var D=lang==='en'?EN:HE,st=document.getElementById('formStatus');
-    var k=document.getElementById('f-name').value.trim()?'sent':'need';
+    e.preventDefault();var D=lang==='en'?EN:HE,st=document.getElementById('formStatus'),f=e.target;
+    var nameEl=document.getElementById('f-name'),ok=!!nameEl.value.trim(),k=ok?'sent':'need';
+    nameEl.setAttribute('aria-invalid',ok?'false':'true');
     st.dataset.k=k;st.textContent=D[k];st.hidden=false;
+    if(!ok){nameEl.focus();return;}
+    var rows=[[D.m_name,f.name.value],[D.m_prod,f.production.value],[D.m_date,f.date.value],
+      [D.m_role,f.role.options[f.role.selectedIndex].text],[D.m_venue,f.venue.value],[D.m_msg,f.message.value]];
+    var body=rows.filter(function(r){return r[1].trim()}).map(function(r){return r[0]+': '+r[1].trim()}).join('\n');
+    location.href='mailto:dinsegev1@gmail.com?subject='+encodeURIComponent(D.m_subj+' – '+f.name.value.trim())+'&body='+encodeURIComponent(body);
   });
+
+  /* in-page links scroll in script, so they work even where hash navigation is blocked (previews, data: URLs) */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute('href').slice(1),el=id?document.getElementById(id):null;if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+    try{history.replaceState(null,'','#'+id)}catch(err){}
+  });
+
+  /* header border once scrolled, active nav link */
+  var top=document.querySelector('.top'),links=[].slice.call(document.querySelectorAll('.top nav a'));
+  function onScroll(){top.classList.toggle('scrolled',window.scrollY>8);
+    if(window.scrollY<200)links.forEach(function(a){a.classList.remove('on')});}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;
+      links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id)});});},{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('.sec[id]').forEach(function(s){spy.observe(s)});
+
+    /* scroll reveal, staggered within each group */
+    var rv=document.querySelectorAll('#services h2,#services .intro,.svc,#work h2,#work .intro,.fact,.teach>div,.contact');
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){
+      var sib=[].indexOf.call(el.parentNode.children,el);
+      el.classList.add('rv');el.style.transitionDelay=Math.min(sib,4)*70+'ms';io.observe(el);
+    });
+  }else{document.documentElement.classList.remove('js');}
 })();
 </script>
 
