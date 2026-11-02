@@ -412,6 +412,8 @@ footer a:hover{color:var(--amber)}
   function fit(){field.style.top=work.getBoundingClientRect().top+scrollY+'px'}
   fit();addEventListener('resize',fit);addEventListener('load',fit);
   if(document.fonts)document.fonts.ready.then(fit);
+  /* anything above "how I work" can still change height after load (fonts, wrapping), so follow it */
+  if('ResizeObserver' in window)new ResizeObserver(fit).observe(document.body);
 })();
 </script>
 
