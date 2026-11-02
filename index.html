@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="דין שגב (DINO) – טכנאי סאונד להופעות חיות, FOH ומוניטורים. מרצה להגברה ואודיו.">
+<title>DINO · דין שגב</title>
+<script>try{var l=localStorage.getItem('dino-lang');document.documentElement.lang=l==='en'?'en':'he';document.documentElement.dir=l==='en'?'ltr':'rtl';}catch(e){document.documentElement.dir='rtl';document.documentElement.lang='he';}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Rubik:wght@400;500&display=swap">
+<style>
+/* Layout: a stage at night. One bold moment: the name under a warm spotlight with a live waveform running across it. Everything after is quiet, generous, single-column reading. Single dark look by choice. */
+:root{
+  color-scheme: dark;
+  --night:#1b1521;      /* aubergine stage dark */
+  --haze:#251d2c;       /* raised surface */
+  --rule:#3b3044;       /* dividers */
+  --paper:#f7eee6;      /* warm white text */
+  --dust:#c3b4bd;       /* secondary text */
+  --amber:#ffb45e;      /* stage light */
+  --amber-ink:#2a1606;
+  --display:"Frank Ruhl Libre","David","Times New Roman",serif;
+  --body:"Rubik","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--paper);font-family:var(--body);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
+a{color:var(--amber);text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--night) 82%,transparent);backdrop-filter:blur(10px)}
+.top .wrap{display:flex;align-items:center;gap:28px;padding-block:14px}
+.mark{font-family:var(--display);font-weight:900;font-size:26px;color:var(--paper);text-decoration:none;line-height:1;letter-spacing:.02em}
+.top nav{display:flex;gap:22px;margin-inline-start:auto}
+.top nav a{color:var(--dust);text-decoration:none;font-size:16px}
+.top nav a:hover{color:var(--paper)}
+.lang{font:inherit;font-size:15px;background:none;color:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:4px 14px;cursor:pointer}
+.lang:hover{border-color:var(--amber)}
+@media (max-width:720px){.top nav{display:none}.lang{margin-inline-start:auto}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;inset:-30% -10% auto;height:120%;
+  background:radial-gradient(ellipse 42% 60% at 50% 0%,color-mix(in srgb,var(--amber) 26%,transparent),transparent 70%)}
+.hero .wrap{padding-block:72px 0;text-align:center}
+.hero h1{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(92px,21vw,232px);line-height:.85;letter-spacing:-.01em}
+.hero .who{font-family:var(--display);font-weight:500;font-size:clamp(26px,4.4vw,38px);margin:14px 0 0}
+.hero .role{font-size:clamp(18px,2.2vw,21px);color:var(--dust);margin:16px auto 0;max-width:34ch;text-wrap:balance}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;font-weight:500;text-decoration:none;padding:13px 26px;border-radius:999px}
+.btn.solid{background:var(--amber);color:var(--amber-ink)}
+.btn.solid:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
+.btn.line{color:var(--paper);box-shadow:inset 0 0 0 1px var(--rule)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px var(--amber)}
+#wave{display:block;width:100%;height:180px;margin-top:40px}
+@media (max-width:600px){#wave{height:120px}.hero .wrap{padding-block:52px 0}}
+
+/* sections */
+.sec .wrap{padding-block:88px}
+.sec + .sec .wrap{border-top:1px solid var(--rule)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,56px);line-height:1.08;margin:0 0 14px;text-wrap:balance}
+.intro{color:var(--dust);max-width:56ch;margin:0 0 44px}
+.kicker{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.4vw,44px);line-height:1.1;color:var(--amber);margin:-2px 0 20px;text-align:start}
+[dir="rtl"] .kicker{text-align:right}
+
+/* services: two-column list, no cards */
+.svc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.svc{padding-block:26px;border-top:1px solid var(--rule);min-width:0}
+.svc h3{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.2;margin:0 0 8px}
+.svc p{margin:0;color:var(--dust);max-width:44ch}
+.svc .pos{display:inline-block;font-size:19px;font-weight:500;color:var(--amber);margin-bottom:6px}
+@media (max-width:720px){.svc-list{grid-template-columns:1fr}}
+
+/* how I work */
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.fact{min-width:0}
+.fact b{display:block;font-family:var(--display);font-weight:700;font-size:24px;line-height:1.25;margin-bottom:6px}
+.fact span{color:var(--dust)}
+@media (max-width:760px){.facts{grid-template-columns:1fr;gap:28px}}
+
+/* teaching */
+.teach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+@media (max-width:760px){.teach{grid-template-columns:1fr;gap:36px}}
+.creds{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.creds li{padding:6px 16px;border-radius:999px;background:var(--haze);font-size:16px}
+.tools-h{font-size:16px;color:var(--dust);margin:0 0 10px}
+.tools{list-style:none;padding:0;margin:0}
+.tools li{border-top:1px solid var(--rule)}
+.tools li:last-child{border-bottom:1px solid var(--rule)}
+.tools a{display:block;padding:16px 0;text-decoration:none;color:var(--paper)}
+.tools a:hover .t{color:var(--amber)}
+.tools .t{font-weight:500;display:block}
+.tools .d{display:block;color:var(--dust);font-size:15px}
+
+/* contact */
+.contact{background:var(--haze);border-radius:28px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;isolation:isolate}
+.contact::before{content:"";position:absolute;z-index:-1;inset:auto -20% -60% auto;width:70%;height:120%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--amber) 14%,transparent),transparent 65%)}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:720px}
+.full{grid-column:1/-1}
+@media (max-width:600px){form{grid-template-columns:1fr}}
+label{display:block;font-size:15px;color:var(--dust);margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;font-size:17px;color:var(--paper);background:var(--night);border:1px solid var(--rule);border-radius:12px;padding:12px 14px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--amber)}
+textarea{min-height:120px;resize:vertical}
+button.send{font:inherit;font-weight:500;background:var(--amber);color:var(--amber-ink);border:0;border-radius:999px;padding:13px 30px;cursor:pointer;justify-self:start}
+button.send:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
+.status{color:var(--amber);margin:0}
+.direct{margin-top:32px;display:flex;gap:32px;flex-wrap:wrap;color:var(--dust);font-size:16px}
+.direct strong{color:var(--paper);font-weight:500}
+.direct a{text-decoration:none;user-select:text}
+.direct a:hover strong{color:var(--amber)}
+
+footer .wrap{padding-block:36px;color:var(--dust);font-size:15px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">DINO</a>
+    <nav aria-label="ניווט">
+      <a href="#services" data-i="nav1">שירותים</a>
+      <a href="#work" data-i="nav2">איך אני עובד</a>
+      <a href="#teaching" data-i="nav3">הוראה</a>
+      <a href="#contact" data-i="nav4">יצירת קשר</a>
+    </nav>
+    <button class="lang" id="langBtn" type="button" aria-label="Switch language">English</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>DINO</h1>
+      <p class="who" data-i="name">דין שגב</p>
+      <p class="role" data-i="role">טכנאי סאונד להופעות חיות. הסאונד שהקהל שומע, והסאונד שהאמן שומע על הבמה.</p>
+      <div class="ctas">
+        <a class="btn solid" href="#contact" data-i="cta1">בדיקת זמינות למופע</a>
+        <a class="btn line" href="#services" data-i="cta2">מה אני עושה</a>
+      </div>
+    </div>
+    <canvas id="wave" aria-hidden="true"></canvas>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <h2 data-i="s_title">מה אני מביא להפקה</h2>
+      <p class="intro" style="white-space:pre-line" data-i="s_intro">אני עובד בעמדת FOH ובעמדת מוניטורים, ומגיע לכל מופע עם הכנה מסודרת:
+מההיכרות האישית, Pre Production, סאונדצ'ק ועד השיר האחרון וירידה מהבמה בכיף ובחיוך.</p>
+      <div class="svc-list">
+        <div class="svc"><span class="pos">FOH</span><h3 data-i="s1t">מיקס לקהל (PA)</h3><p data-i="s1p">מיקס חי לאולם, מבניית הסשן והסאונדצ'ק ועד ניהול ההופעה בזמן אמת.</p></div>
+        <div class="svc"><span class="pos" data-i="s2k">מוניטורים</span><h3 data-i="s2t">מיקס לבמה ו־IEM</h3><p data-i="s2p">מיקסים אישיים לכל נגן וזמר, באוזניות ובמוניטורים, כדי שכל מי שעל הבמה ישמע בדיוק את מה שהוא צריך.</p></div>
+        <div class="svc"><span class="pos" data-i="s3k">ווקאל</span><h3 data-i="s3t">עיצוב סאונד ואפקטים לשירה</h3><p data-i="s3p">עיצוב סאונד שיר אחר שיר, ואפקטים לקול שהאמן שומע גם באוזניות שלו על הבמה.</p></div>
+        <div class="svc"><span class="pos" data-i="s4k">מעבר להרכב חי</span><h3 data-i="s4t">ממופע DJ ללהקה</h3><p data-i="s4p">ליווי סאונד של מופע שעובר מסט DJ ללהקה מלאה: תכנון ערוצים, חלוקת מוניטורים ושמירה על הסאונד של האלבום.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="wrap">
+      <h2 data-i="e_title">איך אני עובד</h2>
+      <p class="intro" data-i="e_intro">זה מתחיל הרבה לפני שעולים לבמה, מתוך קשר וחיבור אישי.</p>
+      <div class="facts">
+        <div class="fact"><b data-i="e1t">הנדסאי קול מוסמך</b><span data-i="e1d">הכשרה מקצועית מלאה בהנדסת קול.</span></div>
+        <div class="fact"><b data-i="e2t">עיצוב סאונד לכל שיר</b><span data-i="e2d">אפקטים, דינמיקה ושינויים מתוכננים מראש לפי הסטליסט.</span></div>
+        <div class="fact"><b data-i="e3t">שתי העמדות</b><span data-i="e3d">FOH ומוניטורים, כולל הקמה של מערכות IEM.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="teaching">
+    <div class="wrap">
+      <div class="teach">
+        <div>
+          <h2 data-i="t_title">מרצה להגברה ואודיו</h2>
+          <p class="kicker" dir="ltr">Live Sound</p>
+          <p class="intro" style="margin-bottom:0" data-i="t_p">אני מלמד הגברה להופעות חיות, שילוב של ידע מהשטח עם פדגוגיה ברורה.</p>
+          <ul class="creds">
+            <li data-i="c1">תעודת הוראה</li>
+            <li data-i="c2">תואר ראשון בחינוך</li>
+            <li data-i="c3">תואר שני בחינוך</li>
+          </ul>
+        </div>
+        <div>
+          <p class="tools-h" data-i="tools_h">כלים שבניתי לסטודנטים</p>
+          <ul class="tools">
+            <li><a href="https://dino2code.github.io/Dino2Sims/vocal-compressor/" target="_blank" rel="noopener"><span class="t" data-i="g2t">סימולטור קומפרסור לשירה</span><span class="d" data-i="g2d">Attack, Release, Ratio ו־Makeup, עם צליל בזמן אמת</span></a></li>
+            <li><a href="https://dino2code.github.io/Dino2Sims/delay-calculator/" target="_blank" rel="noopener"><span class="t" data-i="g3t">מחשבון דיליי רמקולים</span><span class="d" data-i="g3d">לפי מרחקים, טמפרטורה וגבהים, עם הדמיה תלת־ממדית</span></a></li>
+            <li><a href="https://dino2code.github.io/AudiofileCheck/" target="_blank" rel="noopener"><span class="t">AudioCheck</span><span class="d" data-i="g4d">בדיקת האיכות האמיתית של קובצי אודיו</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <h2 data-i="f_title">יש לכם מופע?</h2>
+        <p class="intro" data-i="f_lead">ספרו לי על ההפקה, התאריך והמקום, ואחזור אליכם.</p>
+        <form id="leadForm" novalidate>
+          <div><label for="f-name" data-i="f1">שם</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div><label for="f-prod" data-i="f2">הפקה או אמן</label><input id="f-prod" name="production"></div>
+          <div><label for="f-date" data-i="f3">תאריך המופע</label><input id="f-date" name="date" type="date"></div>
+          <div><label for="f-role" data-i="f4">עמדה</label>
+            <select id="f-role" name="role">
+              <option value="foh" data-i="o1">FOH</option>
+              <option value="mon" data-i="o2">מוניטורים ו־IEM</option>
+              <option value="both" data-i="o3">שתיהן, או שעוד לא ידוע</option>
+            </select></div>
+          <div class="full"><label for="f-venue" data-i="f5">מקום</label><input id="f-venue" name="venue"></div>
+          <div class="full"><label for="f-msg" data-i="f6">פרטים נוספים</label><textarea id="f-msg" name="message"></textarea></div>
+          <button class="send full" type="submit" data-i="f_send">שליחת פנייה</button>
+          <p class="status full" id="formStatus" role="status" hidden></p>
+        </form>
+        <div class="direct">
+          <span><span data-i="d1">טלפון</span>: <a href="tel:+972547777223" dir="ltr"><strong>054-7777223</strong></a></span>
+          <span><span data-i="d2">מייל</span>: <a href="mailto:dinsegev1@gmail.com" dir="ltr"><strong>dinsegev1@gmail.com</strong></a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i="foot">דין שגב, טכנאי סאונד להופעות חיות, תל אביב</span>
+    <span>DINO</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* waveform under the spotlight */
+  var cv=document.getElementById('wave'),ctx=cv.getContext('2d'),W=0,H=0,dpr=1;
+  function size(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+  var amber=getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()||'#ffb45e';
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    var mid=H/2,n=Math.max(120,Math.floor(W/3));
+    for(var layer=0;layer<3;layer++){
+      ctx.beginPath();
+      for(var i=0;i<=n;i++){
+        var x=i/n*W,u=i/n;
+        var env=Math.pow(Math.sin(Math.PI*u),1.6);           /* fades at both edges */
+        var y=Math.sin(u*22+t*1.1+layer*.9)*.55+Math.sin(u*57-t*1.7+layer)*.3+Math.sin(u*9+t*.6)*.25;
+        var py=mid+y*env*(H*.36)*(1-layer*.28);
+        i?ctx.lineTo(x,py):ctx.moveTo(x,py);
+      }
+      ctx.strokeStyle=amber;ctx.globalAlpha=layer===0?.95:.28-layer*.06;ctx.lineWidth=layer===0?2:1.2;ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+  }
+  size();frame(0);
+  if('ResizeObserver' in window)new ResizeObserver(function(){size();frame(last)}).observe(cv);
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,last=0;
+  if(!still){(function loop(ts){last=ts/1000;frame(last);requestAnimationFrame(loop);})(0);}
+
+  /* language */
+  var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
+    role:"Live sound engineer. The sound the audience hears, and the sound the artist hears on stage.",
+    cta1:"Check availability",cta2:"What I do",
+    s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song and walking off stage happy and smiling.",
+    s1t:"Mixing for the audience (PA)",s1p:"A live mix for the room, from building the session and soundcheck to running the show in real time.",
+    s2k:"Monitors",s2t:"Stage mixes and IEMs",s2p:"Personal mixes for every player and singer, on wedges and IEMs, so everyone on stage hears exactly what they need.",
+    s3k:"Vocals",s3t:"Vocal sound design and effects",s3p:"Song-by-song sound design, with vocal effects the artist also hears in their IEMs on stage.",
+    s4k:"Going live",s4t:"From DJ set to live band",s4p:"Sound for a show moving from a DJ set to a full band: channel planning, monitor layout, and keeping the album's sound.",
+    e_title:"How I work",e_intro:"It starts long before anyone walks on stage, with a personal connection.",
+    e1t:"Certified sound engineering technician",e1d:"Full professional training in sound engineering.",
+    e2t:"Sound design for every song",e2d:"Effects, dynamics and changes planned ahead, following the setlist.",
+    e3t:"Both positions",e3d:"Front of house and monitors, including IEM system setup.",
+    t_title:"Live sound and audio lecturer",t_p:"I teach live sound for concerts, combining hands-on experience from the field with clear teaching.",
+    c1:"Teaching certificate",c2:"BA in Education",c3:"MA in Education",tools_h:"Tools I built for students",
+    g2t:"Vocal compressor simulator",g2d:"Attack, Release, Ratio and Makeup, with live sound",
+    g3t:"Speaker delay calculator",g3d:"By distance, temperature and height, with a 3D view",g4d:"Checks the real quality of audio files",
+    f_title:"Got a show?",f_lead:"Tell me about the production, the date and the venue, and I'll get back to you.",
+    f1:"Name",f2:"Production or artist",f3:"Show date",f4:"Position",o1:"FOH",o2:"Monitors and IEMs",o3:"Both, or not sure yet",f5:"Venue",f6:"Details",f_send:"Send request",
+    d1:"Phone",d2:"Email",soon:"Coming soon",foot:"Din Segev, live sound engineer, Tel Aviv",
+    sent:"Thanks. The form isn't connected yet, so this request wasn't sent.",need:"Enter your name to send the request."};
+  var HE={};
+  document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(!(k in HE))HE[k]=el.textContent;});
+  HE.sent="תודה. הטופס עדיין לא מחובר, ולכן הפנייה לא נשלחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
+  var lang='he';
+  function apply(l){
+    lang=l;var D=l==='en'?EN:HE;
+    document.documentElement.lang=l;document.documentElement.dir=l==='en'?'ltr':'rtl';
+    document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(k in D)el.textContent=D[k];});
+    document.getElementById('langBtn').textContent=l==='en'?'עברית':'English';
+    var st=document.getElementById('formStatus');if(!st.hidden)st.textContent=D[st.dataset.k||'sent'];
+    try{localStorage.setItem('dino-lang',l)}catch(e){}
+  }
+  var saved=null;try{saved=localStorage.getItem('dino-lang')}catch(e){}
+  apply(saved==='en'?'en':'he');
+  document.getElementById('langBtn').addEventListener('click',function(){apply(lang==='en'?'he':'en')});
+
+  /* form: not connected yet */
+  document.getElementById('leadForm').addEventListener('submit',function(e){
+    e.preventDefault();var D=lang==='en'?EN:HE,st=document.getElementById('formStatus');
+    var k=document.getElementById('f-name').value.trim()?'sent':'need';
+    st.dataset.k=k;st.textContent=D[k];st.hidden=false;
+  });
+})();
+</script>
+
+</body>
+</html>
