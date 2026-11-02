@@ -163,11 +163,22 @@ footer a:hover{color:var(--amber)}
 .field{position:absolute;left:0;right:0;top:0;height:440px;margin-top:-250px;z-index:-1;pointer-events:none;overflow:hidden;
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
 .field canvas{display:block;width:100%;height:100%}
+
+/* ring sphere: faint rings sitting on the line where "got a show?" begins (JS sets top) */
+.rings-field{position:absolute;left:0;right:0;top:0;height:760px;margin-top:-380px;z-index:-1;pointer-events:none;overflow:hidden}
+.rings-field i{position:absolute;inset:0}
+.rings-field .rings{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 41px,rgba(247,238,230,.07) 42px,transparent 43px);-webkit-mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%);mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%)}
+.rings-field .core{background:radial-gradient(circle 150px at 50% 50%,rgba(212,255,58,.08),transparent)}
+.rings-field u{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border-radius:50%;border:1px solid rgba(212,255,58,.4);animation:ringPulse 5s cubic-bezier(.2,.7,.2,1) infinite}
+.rings-field u.two{animation-delay:2.5s}
+@keyframes ringPulse{from{transform:scale(1);opacity:.8}to{transform:scale(7.5);opacity:0}}
+@media (prefers-reduced-motion:reduce){.rings-field u{animation:none;opacity:0}}
 </style>
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="field" aria-hidden="true"><canvas></canvas></div>
+<div class="field" data-at="work" aria-hidden="true"><canvas></canvas></div>
+<div class="rings-field" data-at="contact" aria-hidden="true"><i class="core"></i><i class="rings"></i><u></u><u class="two"></u></div>
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#top" dir="ltr">DINO<i>.</i></a>
@@ -405,14 +416,13 @@ footer a:hover{color:var(--amber)}
   }else{document.documentElement.classList.remove('js');}
 })();
 
-/* centre the sound field on the line where "how I work" begins */
+/* centre each decoration on the line where its section (data-at) begins */
 (function(){
-  var field=document.querySelector('.field'),work=document.getElementById('work');
-  if(!field||!work)return;
-  function fit(){field.style.top=work.getBoundingClientRect().top+scrollY+'px'}
+  var deco=[].slice.call(document.querySelectorAll('[data-at]'));
+  function fit(){deco.forEach(function(el){var s=document.getElementById(el.dataset.at);if(s)el.style.top=s.getBoundingClientRect().top+scrollY+'px'})}
   fit();addEventListener('resize',fit);addEventListener('load',fit);
   if(document.fonts)document.fonts.ready.then(fit);
-  /* anything above "how I work" can still change height after load (fonts, wrapping), so follow it */
+  /* content above can still change height after load (fonts, wrapping), so follow it */
   if('ResizeObserver' in window)new ResizeObserver(fit).observe(document.body);
 })();
 </script>
