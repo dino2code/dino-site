@@ -244,7 +244,7 @@ footer a:hover{color:var(--amber)}
     <div class="wrap">
       <h2 data-i="s_title">מה אני מביא להפקה</h2>
       <p class="intro" style="white-space:pre-line" data-i="s_intro">אני עובד בעמדת FOH ובעמדת מוניטורים, ומגיע לכל מופע עם הכנה מסודרת:
-מההיכרות האישית, Pre Production, סאונדצ'ק ועד השיר האחרון וירידה מהבמה בכיף ובחיוך.</p>
+מההיכרות האישית, Pre Production, סאונדצ'ק ועד השיר האחרון.</p>
       <div class="svc-list">
         <div class="svc"><span class="pos">FOH</span><h3 data-i="s1t">מיקס לקהל (PA)</h3><p data-i="s1p">מיקס חי לאולם, מבניית הסשן והסאונדצ'ק ועד ניהול ההופעה בזמן אמת.</p></div>
         <div class="svc"><span class="pos" data-i="s2k">מוניטורים</span><h3 data-i="s2t">מיקס לבמה ו־IEM</h3><p data-i="s2p">מיקסים אישיים לכל נגן וזמר, באוזניות ובמוניטורים, כדי שכל מי שעל הבמה ישמע בדיוק את מה שהוא צריך.</p></div>
@@ -298,16 +298,8 @@ footer a:hover{color:var(--amber)}
         <p class="intro" data-i="f_lead">ספרו לי על ההפקה, התאריך והמקום, ואחזור אליכם.</p>
         <form id="leadForm" novalidate>
           <div><label for="f-name" data-i="f1">שם</label><input id="f-name" name="name" autocomplete="name" required></div>
-          <div><label for="f-prod" data-i="f2">הפקה או אמן</label><input id="f-prod" name="production"></div>
           <div><label for="f-date" data-i="f3">תאריך המופע</label><input id="f-date" name="date" type="date"></div>
-          <div><label for="f-role" data-i="f4">עמדה</label>
-            <select id="f-role" name="role">
-              <option value="foh" data-i="o1">FOH</option>
-              <option value="mon" data-i="o2">מוניטורים ו־IEM</option>
-              <option value="both" data-i="o3">שתיהן, או שעוד לא ידוע</option>
-            </select></div>
-          <div class="full"><label for="f-venue" data-i="f5">מקום</label><input id="f-venue" name="venue"></div>
-          <div class="full"><label for="f-msg" data-i="f6">פרטים נוספים</label><textarea id="f-msg" name="message"></textarea></div>
+          <div class="full"><label for="f-msg" data-i="f6">פרטים</label><textarea id="f-msg" name="message"></textarea></div>
           <button class="send full" type="submit" data-i="f_send">שליחה בוואטסאפ</button>
           <p class="status full" id="formStatus" role="status" hidden></p>
         </form>
@@ -372,7 +364,7 @@ footer a:hover{color:var(--amber)}
   var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
     role:"Live sound engineer. The sound the audience hears, and the sound the artist hears on stage.",
     cta1:"Check availability",cta2:"What I do",
-    s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song and walking off stage happy and smiling.",
+    s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song.",
     s1t:"Mixing for the audience (PA)",s1p:"A live mix for the room, from building the session and soundcheck to running the show in real time.",
     s2k:"Monitors",s2t:"Stage mixes and IEMs",s2p:"Personal mixes for every player and singer, on wedges and IEMs, so everyone on stage hears exactly what they need.",
     shot:"FOH · Live show",wa_float:"WhatsApp",
@@ -387,14 +379,14 @@ footer a:hover{color:var(--amber)}
     g2t:"Vocal compressor simulator",g2d:"Attack, Release, Ratio and Makeup, with live sound",
     g3t:"Speaker delay calculator",g3d:"By distance, temperature and height, with a 3D view",g4d:"Checks the real quality of audio files",
     f_title:"Got a show?",f_lead:"Tell me about the production, the date and the venue, and I'll get back to you.",
-    f1:"Name",f2:"Production or artist",f3:"Show date",f4:"Position",o1:"FOH",o2:"Monitors and IEMs",o3:"Both, or not sure yet",f5:"Venue",f6:"Details",f_send:"Send on WhatsApp",
+    f1:"Name",f3:"Show date",f6:"Details",f_send:"Send on WhatsApp",
     d1:"Phone",d2:"Email",soon:"Coming soon",foot:"Din Segev, live sound engineer, Tel Aviv",up:"Back to top ↑",
     sent:"WhatsApp should open with the details filled in. Just hit send.",need:"Enter your name to send the request.",
-    m_subj:"Show inquiry",m_name:"Name",m_prod:"Production / artist",m_date:"Date",m_role:"Position",m_venue:"Venue",m_msg:"Details"};
+    m_subj:"Show inquiry",m_name:"Name",m_date:"Date",m_msg:"Details"};
   var HE={};
   document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(!(k in HE))HE[k]=el.textContent;});
   HE.sent="וואטסאפ אמור להיפתח עם כל הפרטים. נשאר רק ללחוץ שליחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
-  HE.m_subj="פנייה לגבי מופע";HE.m_name="שם";HE.m_prod="הפקה / אמן";HE.m_date="תאריך";HE.m_role="עמדה";HE.m_venue="מקום";HE.m_msg="פרטים";
+  HE.m_subj="פנייה לגבי מופע";HE.m_name="שם";HE.m_date="תאריך";HE.m_msg="פרטים";
   var lang='he';
   function apply(l){
     lang=l;var D=l==='en'?EN:HE;
@@ -416,8 +408,7 @@ footer a:hover{color:var(--amber)}
     nameEl.setAttribute('aria-invalid',ok?'false':'true');
     st.dataset.k=k;st.textContent=D[k];st.hidden=false;
     if(!ok){nameEl.focus();return;}
-    var rows=[[D.m_name,f.name.value],[D.m_prod,f.production.value],[D.m_date,f.date.value],
-      [D.m_role,f.role.options[f.role.selectedIndex].text],[D.m_venue,f.venue.value],[D.m_msg,f.message.value]];
+    var rows=[[D.m_name,f.name.value],[D.m_date,f.date.value],[D.m_msg,f.message.value]];
     var body=rows.filter(function(r){return r[1].trim()}).map(function(r){return r[0]+': '+r[1].trim()}).join('\n');
     var url='https://wa.me/972547777223?text='+encodeURIComponent(D.m_subj+'\n'+body);
     var w=window.open(url,'_blank');if(w)w.opener=null;else location.href=url;
