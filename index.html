@@ -191,18 +191,18 @@ footer a:hover{color:var(--amber)}
 @media (max-width:720px){.shot{aspect-ratio:4/3;margin-top:24px;border-radius:14px}.shot figcaption{bottom:12px;inset-inline-start:12px;font-size:13px}}
 
 /* sound field: a canvas band sitting on the line where "how I work" begins (JS sets top) */
-.field{position:absolute;left:0;right:0;top:0;height:440px;margin-top:-250px;z-index:-1;pointer-events:none;overflow:hidden;
+.field{position:absolute;left:0;right:0;top:0;height:320px;margin-top:-190px;z-index:-1;pointer-events:none;overflow:hidden;
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
 .field canvas{display:block;width:100%;height:100%}
 
 /* ring sphere: faint rings sitting on the line where "got a show?" begins (JS sets top) */
 .rings-field{position:absolute;left:0;right:0;top:0;height:760px;margin-top:-380px;z-index:-1;pointer-events:none;overflow:hidden}
 .rings-field i{position:absolute;inset:0}
-.rings-field .rings{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 41px,rgba(247,238,230,.07) 42px,transparent 43px);-webkit-mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%);mask:radial-gradient(circle 360px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%)}
-.rings-field .core{background:radial-gradient(circle 150px at 50% 50%,rgba(212,255,58,.08),transparent)}
-.rings-field u{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border-radius:50%;border:1px solid rgba(212,255,58,.4);animation:ringPulse 5s cubic-bezier(.2,.7,.2,1) infinite}
-.rings-field u.two{animation-delay:2.5s}
-@keyframes ringPulse{from{transform:scale(1);opacity:.8}to{transform:scale(7.5);opacity:0}}
+.rings-field .rings{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 41px,rgba(247,238,230,.07) 42px,transparent 43px);-webkit-mask:radial-gradient(circle 250px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%);mask:radial-gradient(circle 250px at 50% 50%,#000 15%,rgba(0,0,0,.45) 55%,transparent 100%)}
+.rings-field .core{background:radial-gradient(circle 105px at 50% 50%,rgba(212,255,58,.08),transparent)}
+.rings-field u{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;border:1px solid rgba(212,255,58,.4);animation:ringPulse 10s cubic-bezier(.2,.7,.2,1) infinite}
+.rings-field u.two{animation-delay:5s}
+@keyframes ringPulse{from{transform:scale(1);opacity:.8}to{transform:scale(7);opacity:0}}
 @media (prefers-reduced-motion:reduce){.rings-field u{animation:none;opacity:0}}
 </style>
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -461,6 +461,7 @@ footer a:hover{color:var(--amber)}
 <script>
 /* sound field drawing: a breathing amber orb, thin light ribbons passing through it */
 function draw(x,W,H,t){
+  t*=.5;   /* half speed */
   x.clearRect(0,0,W,H);
   var cx=W/2,cy=H/2,r=Math.min(H*.2,80)*(1+.07*Math.sin(t*1.6));
   x.globalCompositeOperation='lighter';
