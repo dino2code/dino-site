@@ -16,7 +16,10 @@
 <meta property="og:image:alt" content="דין שגב מאחורי קונסולת הסאונד בהופעה חיה">
 <meta property="og:locale" content="he_IL">
 <meta name="twitter:card" content="summary_large_image">
-<script>document.documentElement.classList.add('js');try{var l=localStorage.getItem('dino-lang-choice');document.documentElement.lang=l==='he'?'he':'en';document.documentElement.dir=l==='he'?'rtl':'ltr';}catch(e){document.documentElement.dir='ltr';document.documentElement.lang='en';}</script>
+<script>document.documentElement.classList.add('js');/* visitors in Israel (Israeli time zone, or a Hebrew browser) start in Hebrew; everyone else in English */
+window.DINO_LANG=(function(){try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';if(/^Asia\/(Jerusalem|Tel_Aviv)$/.test(tz))return 'he';}catch(e){}
+  var ls=navigator.languages||[navigator.language||''];for(var i=0;i<ls.length;i++){if(/^(he|iw)\b/i.test(ls[i]))return 'he';}return 'en';})();
+document.documentElement.lang=window.DINO_LANG;document.documentElement.dir=window.DINO_LANG==='he'?'rtl':'ltr';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bellefair&family=Assistant:wght@300;400;600&display=swap">
@@ -409,13 +412,9 @@ footer a:hover{color:var(--amber)}
     document.getElementById('waFloat').href='https://wa.me/972547777223?text='+encodeURIComponent(l==='en'?"Hi Din, I'd like to check your availability for a show":'היי דין, אשמח לבדוק זמינות למופע');
     var st=document.getElementById('formStatus');if(!st.hidden)st.textContent=D[st.dataset.k||'sent'];
   }
-  /* English by default; only a visitor's own click on the button is remembered */
-  var saved=null;try{saved=localStorage.getItem('dino-lang-choice')}catch(e){}
-  apply(saved==='he'?'he':'en');
-  document.getElementById('langBtn').addEventListener('click',function(){
-    apply(lang==='en'?'he':'en');
-    try{localStorage.setItem('dino-lang-choice',lang)}catch(e){}
-  });
+  /* first language comes from the visitor's location (see the head script); the button switches for this visit */
+  apply(window.DINO_LANG==='he'?'he':'en');
+  document.getElementById('langBtn').addEventListener('click',function(){apply(lang==='en'?'he':'en')});
 
   /* form: opens WhatsApp with the request filled in (more reliable on phones than a mail app) */
   document.getElementById('leadForm').addEventListener('submit',function(e){
