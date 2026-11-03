@@ -359,7 +359,7 @@ footer a:hover{color:var(--amber)}
   var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,last=1;
   size();frame(last);
   if('ResizeObserver' in window)new ResizeObserver(function(){size();frame(last)}).observe(cv);
-  if(!still){(function loop(ts){last=1+ts/1000;frame(last);requestAnimationFrame(loop);})(0);}
+  if(!still){(function loop(ts){last=1+ts/2000;frame(last);   /* half speed; still starts from the same first ridge at t=1 */requestAnimationFrame(loop);})(0);}
 
   /* language */
   var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
