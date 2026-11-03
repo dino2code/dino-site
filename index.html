@@ -102,12 +102,10 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,5.4vw,56px);l
 .js .rv.in{opacity:1;transform:none}
 
 /* services: two-column list, no cards */
-.svc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;counter-reset:svc}
-.svc{position:relative;padding-block:26px;border-top:1px solid var(--rule);min-width:0;counter-increment:svc}
+.svc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.svc{position:relative;padding-block:26px;border-top:1px solid var(--rule);min-width:0}
 .svc::before{content:"";position:absolute;top:-1px;inset-inline-start:0;width:0;height:2px;background:var(--amber);transition:width .45s ease}
 .svc:hover::before{width:64px}
-.svc::after{content:counter(svc,decimal-leading-zero);position:absolute;top:26px;inset-inline-end:0;font-family:var(--display);font-weight:400;font-size:15px;color:var(--rule);letter-spacing:.06em;transition:color .3s}
-.svc:hover::after{color:var(--amber)}
 .svc h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.2;margin:0 0 8px}
 .svc p{margin:0;color:var(--dust);max-width:44ch}
 .svc .pos{display:inline-block;font-size:19px;font-weight:600;color:var(--amber);margin-bottom:6px}
@@ -170,6 +168,15 @@ footer a:hover{color:var(--amber)}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
 
+/* floating WhatsApp button: always one tap away from a booking */
+.wa{position:fixed;z-index:15;bottom:max(18px,env(safe-area-inset-bottom,0px));inset-inline-end:18px;display:flex;align-items:center;gap:8px;
+  padding-block:12px;padding-inline:14px 18px;border-radius:999px;background:var(--amber);color:var(--amber-ink);font-weight:600;font-size:16px;text-decoration:none;
+  box-shadow:0 10px 30px -8px color-mix(in srgb,var(--amber) 60%,transparent);transition:background-color .2s,transform .15s}
+.wa:hover{background:color-mix(in srgb,var(--amber) 88%,white)}
+.wa:active{transform:scale(.96)}
+.wa svg{width:24px;height:24px;flex:none}
+@media (max-width:720px){.wa{padding:0;width:56px;height:56px;justify-content:center;inset-inline-end:14px}.wa span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+
 /* photo strip under the hero: the blue club light pulled toward the site's amber, edges sink into the night */
 .shot{position:relative;max-width:560px;margin:32px auto 0;aspect-ratio:5/4;border-radius:20px;overflow:hidden;background:var(--haze);isolation:isolate}
 .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(.75) sepia(.18) contrast(1.06) brightness(1.05)}
@@ -199,6 +206,7 @@ footer a:hover{color:var(--amber)}
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+<a class="wa" id="waFloat" href="https://wa.me/972547777223?text=%D7%94%D7%99%D7%99%20%D7%93%D7%99%D7%9F%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%20%D7%9C%D7%9E%D7%95%D7%A4%D7%A2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.4.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.5.4-2.5 0-2.1-.8-3.8-2.5-4.6-4.6-.4-1-.3-1.9 0-2.5z"/></svg><span data-i="wa_float">וואטסאפ</span></a>
 <div class="field" data-at="work" aria-hidden="true"><canvas></canvas></div>
 <div class="rings-field" data-at="contact" aria-hidden="true"><i class="core"></i><i class="rings"></i><u></u><u class="two"></u></div>
 <header class="top">
@@ -367,7 +375,7 @@ footer a:hover{color:var(--amber)}
     s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song and walking off stage happy and smiling.",
     s1t:"Mixing for the audience (PA)",s1p:"A live mix for the room, from building the session and soundcheck to running the show in real time.",
     s2k:"Monitors",s2t:"Stage mixes and IEMs",s2p:"Personal mixes for every player and singer, on wedges and IEMs, so everyone on stage hears exactly what they need.",
-    shot:"FOH · Live show",
+    shot:"FOH · Live show",wa_float:"WhatsApp",
     s3k:"Vocal sound design",s3t:"Vocal sound design and effects",s3p:"Song-by-song sound design, with vocal effects the artist also hears in their IEMs on stage.",
     s4k:"Going live",s4t:"From DJ set to live band",s4p:"Sound for a show moving from a DJ set to a full band: channel planning, monitor layout, and keeping the album's sound.",
     e_title:"How I work",e_intro:"It starts long before anyone walks on stage, with a personal connection.",
@@ -393,6 +401,7 @@ footer a:hover{color:var(--amber)}
     document.documentElement.lang=l;document.documentElement.dir=l==='en'?'ltr':'rtl';
     document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(k in D)el.textContent=D[k];});
     document.getElementById('langBtn').textContent=l==='en'?'עברית':'English';
+    document.getElementById('waFloat').href='https://wa.me/972547777223?text='+encodeURIComponent(l==='en'?"Hi Din, I'd like to check your availability for a show":'היי דין, אשמח לבדוק זמינות למופע');
     var st=document.getElementById('formStatus');if(!st.hidden)st.textContent=D[st.dataset.k||'sent'];
     try{localStorage.setItem('dino-lang',l)}catch(e){}
   }
