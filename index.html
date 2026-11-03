@@ -159,6 +159,17 @@ footer a:hover{color:var(--amber)}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
 
+/* photo strip under the hero: the blue club light pulled toward the site's amber, edges sink into the night */
+.shot{position:relative;max-width:560px;margin:32px auto 0;aspect-ratio:5/4;border-radius:20px;overflow:hidden;background:var(--haze);isolation:isolate}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(.75) sepia(.18) contrast(1.06) brightness(1.05)}
+.shot::before{content:"";position:absolute;inset:0;z-index:1;background:var(--amber);mix-blend-mode:soft-light;opacity:.6}
+.shot::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 70% at 40% 25%,color-mix(in srgb,var(--amber) 20%,transparent),transparent 70%),
+             linear-gradient(transparent 55%,color-mix(in srgb,var(--night) 70%,transparent)),
+             radial-gradient(ellipse at 50% 45%,transparent 55%,color-mix(in srgb,var(--night) 75%,transparent))}
+.shot figcaption{position:absolute;z-index:2;bottom:18px;inset-inline-start:18px;padding:5px 14px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--paper);background:color-mix(in srgb,var(--night) 70%,transparent);border:1px solid color-mix(in srgb,var(--amber) 45%,transparent);backdrop-filter:blur(6px)}
+@media (max-width:720px){.shot{aspect-ratio:4/3;margin-top:24px;border-radius:14px}.shot figcaption{bottom:12px;inset-inline-start:12px;font-size:13px}}
+
 /* sound field: a canvas band sitting on the line where "how I work" begins (JS sets top) */
 .field{position:absolute;left:0;right:0;top:0;height:440px;margin-top:-250px;z-index:-1;pointer-events:none;overflow:hidden;
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
@@ -205,6 +216,10 @@ footer a:hover{color:var(--amber)}
     </div>
     <canvas id="wave" aria-hidden="true"></canvas>
   </section>
+
+  <div class="wrap">
+    <figure class="shot"><img src="dino-console.jpg" width="1076" height="880" alt="דין שגב מאחורי קונסולת הסאונד בהופעה חיה" decoding="async"><figcaption data-i="shot">FOH · הופעה חיה</figcaption></figure>
+  </div>
 
   <section class="sec" id="services">
     <div class="wrap">
@@ -341,6 +356,7 @@ footer a:hover{color:var(--amber)}
     s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song and walking off stage happy and smiling.",
     s1t:"Mixing for the audience (PA)",s1p:"A live mix for the room, from building the session and soundcheck to running the show in real time.",
     s2k:"Monitors",s2t:"Stage mixes and IEMs",s2p:"Personal mixes for every player and singer, on wedges and IEMs, so everyone on stage hears exactly what they need.",
+    shot:"FOH · Live show",
     s3k:"Vocal sound design",s3t:"Vocal sound design and effects",s3p:"Song-by-song sound design, with vocal effects the artist also hears in their IEMs on stage.",
     s4k:"Going live",s4t:"From DJ set to live band",s4p:"Sound for a show moving from a DJ set to a full band: channel planning, monitor layout, and keeping the album's sound.",
     e_title:"How I work",e_intro:"It starts long before anyone walks on stage, with a personal connection.",
