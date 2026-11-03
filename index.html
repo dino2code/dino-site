@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="דין שגב מאחורי קונסולת הסאונד בהופעה חיה">
 <meta property="og:locale" content="he_IL">
 <meta name="twitter:card" content="summary_large_image">
-<script>document.documentElement.classList.add('js');try{var l=localStorage.getItem('dino-lang');document.documentElement.lang=l==='en'?'en':'he';document.documentElement.dir=l==='en'?'ltr':'rtl';}catch(e){document.documentElement.dir='rtl';document.documentElement.lang='he';}</script>
+<script>document.documentElement.classList.add('js');try{var l=localStorage.getItem('dino-lang-choice');document.documentElement.lang=l==='he'?'he':'en';document.documentElement.dir=l==='he'?'rtl':'ltr';}catch(e){document.documentElement.dir='ltr';document.documentElement.lang='en';}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bellefair&family=Assistant:wght@300;400;600&display=swap">
@@ -125,17 +125,19 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,5.4vw,56px);l
 @media (max-width:760px){.teach{grid-template-columns:1fr;gap:36px}}
 .creds{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px}
 .creds li{padding:6px 16px;border-radius:999px;background:var(--haze);font-size:16px}
-.tools-h{font-size:16px;color:var(--dust);margin:0 0 10px}
-.tools{list-style:none;padding:0;margin:0}
+/* student tools: a compact list, about 30% less area than a full column */
+.tools-h{font-size:14px;color:var(--dust);margin:0 0 8px}
+.tools{list-style:none;padding:0;margin:0;max-width:84%}
+@media (max-width:760px){.tools{max-width:none}}
 .tools li{border-top:1px solid var(--rule)}
 .tools li:last-child{border-bottom:1px solid var(--rule)}
-.tools a{position:relative;display:block;padding:16px 0;padding-inline-end:36px;text-decoration:none;color:var(--paper)}
-.tools a::after{content:"↗";position:absolute;inset-inline-end:4px;top:50%;translate:0 -50%;color:var(--dust);font-size:20px;transition:color .2s,transform .25s}
+.tools a{position:relative;display:block;padding:11px 0;padding-inline-end:32px;text-decoration:none;color:var(--paper)}
+.tools a::after{content:"↗";position:absolute;inset-inline-end:4px;top:50%;translate:0 -50%;color:var(--dust);font-size:17px;transition:color .2s,transform .25s}
 [dir="rtl"] .tools a::after{content:"↖"}
 .tools a:hover::after{color:var(--amber);transform:translateY(-3px)}
 .tools a:hover .t{color:var(--amber)}
-.tools .t{font-weight:600;display:block;transition:color .2s}
-.tools .d{display:block;color:var(--dust);font-size:15px}
+.tools .t{font-weight:600;font-size:16px;display:block;transition:color .2s}
+.tools .d{display:block;color:var(--dust);font-size:13px;line-height:1.5}
 
 /* contact */
 .contact{background:var(--haze);border-radius:28px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;isolation:isolate}
@@ -393,11 +395,14 @@ footer a:hover{color:var(--amber)}
     document.getElementById('langBtn').textContent=l==='en'?'עברית':'English';
     document.getElementById('waFloat').href='https://wa.me/972547777223?text='+encodeURIComponent(l==='en'?"Hi Din, I'd like to check your availability for a show":'היי דין, אשמח לבדוק זמינות למופע');
     var st=document.getElementById('formStatus');if(!st.hidden)st.textContent=D[st.dataset.k||'sent'];
-    try{localStorage.setItem('dino-lang',l)}catch(e){}
   }
-  var saved=null;try{saved=localStorage.getItem('dino-lang')}catch(e){}
-  apply(saved==='en'?'en':'he');
-  document.getElementById('langBtn').addEventListener('click',function(){apply(lang==='en'?'he':'en')});
+  /* English by default; only a visitor's own click on the button is remembered */
+  var saved=null;try{saved=localStorage.getItem('dino-lang-choice')}catch(e){}
+  apply(saved==='he'?'he':'en');
+  document.getElementById('langBtn').addEventListener('click',function(){
+    apply(lang==='en'?'he':'en');
+    try{localStorage.setItem('dino-lang-choice',lang)}catch(e){}
+  });
 
   /* form: opens WhatsApp with the request filled in (more reliable on phones than a mail app) */
   document.getElementById('leadForm').addEventListener('submit',function(e){
