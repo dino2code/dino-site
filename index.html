@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="דין שגב (DINO) – טכנאי סאונד להופעות חיות, FOH ומוניטורים. מרצה להגברה ואודיו.">
 <title>DINO · דין שגב</title>
+<!-- link previews (WhatsApp, Facebook, X) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dino2code.github.io/dino-site/">
+<meta property="og:title" content="DINO · דין שגב – טכנאי סאונד להופעות חיות">
+<meta property="og:description" content="FOH ומוניטורים להופעות חיות. הסאונד שהקהל שומע, והסאונד שהאמן שומע על הבמה.">
+<meta property="og:image" content="https://dino2code.github.io/dino-site/dino-console.jpg">
+<meta property="og:image:width" content="1076">
+<meta property="og:image:height" content="880">
+<meta property="og:image:alt" content="דין שגב מאחורי קונסולת הסאונד בהופעה חיה">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.classList.add('js');try{var l=localStorage.getItem('dino-lang');document.documentElement.lang=l==='en'?'en':'he';document.documentElement.dir=l==='en'?'ltr':'rtl';}catch(e){document.documentElement.dir='rtl';document.documentElement.lang='he';}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -289,7 +300,7 @@ footer a:hover{color:var(--amber)}
             </select></div>
           <div class="full"><label for="f-venue" data-i="f5">מקום</label><input id="f-venue" name="venue"></div>
           <div class="full"><label for="f-msg" data-i="f6">פרטים נוספים</label><textarea id="f-msg" name="message"></textarea></div>
-          <button class="send full" type="submit" data-i="f_send">שליחת פנייה</button>
+          <button class="send full" type="submit" data-i="f_send">שליחה בוואטסאפ</button>
           <p class="status full" id="formStatus" role="status" hidden></p>
         </form>
         <div class="direct">
@@ -368,13 +379,13 @@ footer a:hover{color:var(--amber)}
     g2t:"Vocal compressor simulator",g2d:"Attack, Release, Ratio and Makeup, with live sound",
     g3t:"Speaker delay calculator",g3d:"By distance, temperature and height, with a 3D view",g4d:"Checks the real quality of audio files",
     f_title:"Got a show?",f_lead:"Tell me about the production, the date and the venue, and I'll get back to you.",
-    f1:"Name",f2:"Production or artist",f3:"Show date",f4:"Position",o1:"FOH",o2:"Monitors and IEMs",o3:"Both, or not sure yet",f5:"Venue",f6:"Details",f_send:"Send request",
+    f1:"Name",f2:"Production or artist",f3:"Show date",f4:"Position",o1:"FOH",o2:"Monitors and IEMs",o3:"Both, or not sure yet",f5:"Venue",f6:"Details",f_send:"Send on WhatsApp",
     d1:"Phone",d2:"Email",soon:"Coming soon",foot:"Din Segev, live sound engineer, Tel Aviv",up:"Back to top ↑",
-    sent:"Your email app should open with the details filled in. Just hit send.",need:"Enter your name to send the request.",
+    sent:"WhatsApp should open with the details filled in. Just hit send.",need:"Enter your name to send the request.",
     m_subj:"Show inquiry",m_name:"Name",m_prod:"Production / artist",m_date:"Date",m_role:"Position",m_venue:"Venue",m_msg:"Details"};
   var HE={};
   document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(!(k in HE))HE[k]=el.textContent;});
-  HE.sent="תוכנת המייל אמורה להיפתח עם כל הפרטים. נשאר רק ללחוץ שליחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
+  HE.sent="וואטסאפ אמור להיפתח עם כל הפרטים. נשאר רק ללחוץ שליחה.";HE.need="צריך למלא שם כדי לשלוח את הפנייה.";
   HE.m_subj="פנייה לגבי מופע";HE.m_name="שם";HE.m_prod="הפקה / אמן";HE.m_date="תאריך";HE.m_role="עמדה";HE.m_venue="מקום";HE.m_msg="פרטים";
   var lang='he';
   function apply(l){
@@ -389,7 +400,7 @@ footer a:hover{color:var(--amber)}
   apply(saved==='en'?'en':'he');
   document.getElementById('langBtn').addEventListener('click',function(){apply(lang==='en'?'he':'en')});
 
-  /* form: opens the visitor's mail app with the request filled in */
+  /* form: opens WhatsApp with the request filled in (more reliable on phones than a mail app) */
   document.getElementById('leadForm').addEventListener('submit',function(e){
     e.preventDefault();var D=lang==='en'?EN:HE,st=document.getElementById('formStatus'),f=e.target;
     var nameEl=document.getElementById('f-name'),ok=!!nameEl.value.trim(),k=ok?'sent':'need';
@@ -399,7 +410,8 @@ footer a:hover{color:var(--amber)}
     var rows=[[D.m_name,f.name.value],[D.m_prod,f.production.value],[D.m_date,f.date.value],
       [D.m_role,f.role.options[f.role.selectedIndex].text],[D.m_venue,f.venue.value],[D.m_msg,f.message.value]];
     var body=rows.filter(function(r){return r[1].trim()}).map(function(r){return r[0]+': '+r[1].trim()}).join('\n');
-    location.href='mailto:dinsegev1@gmail.com?subject='+encodeURIComponent(D.m_subj+' – '+f.name.value.trim())+'&body='+encodeURIComponent(body);
+    var url='https://wa.me/972547777223?text='+encodeURIComponent(D.m_subj+'\n'+body);
+    var w=window.open(url,'_blank');if(w)w.opener=null;else location.href=url;
   });
 
   /* in-page links scroll in script, so they work even where hash navigation is blocked (previews, data: URLs) */
