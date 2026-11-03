@@ -205,6 +205,10 @@ footer a:hover{color:var(--amber)}
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
 .field canvas{display:block;width:100%;height:100%}
 
+/* mini level meter: a quiet, static marker on the line where "I also teach" begins (JS sets top) */
+.meter{position:absolute;left:0;right:0;top:0;height:40px;margin-top:-20px;z-index:1;pointer-events:none;display:flex;justify-content:center;align-items:center}
+.meter svg{width:150px;height:30px;padding-inline:14px;background:var(--night);overflow:visible}
+
 /* ring sphere: faint rings sitting on the line where "got a show?" begins (JS sets top) */
 .rings-field{position:absolute;left:0;right:0;top:0;height:760px;margin-top:-380px;z-index:-1;pointer-events:none;overflow:hidden}
 .rings-field i{position:absolute;inset:0}
@@ -220,6 +224,7 @@ footer a:hover{color:var(--amber)}
 <body>
 <a class="wa" id="waFloat" href="https://wa.me/972547777223?text=%D7%94%D7%99%D7%99%20%D7%93%D7%99%D7%9F%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%96%D7%9E%D7%99%D7%A0%D7%95%D7%AA%20%D7%9C%D7%9E%D7%95%D7%A4%D7%A2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.4.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.5.4-2.5 0-2.1-.8-3.8-2.5-4.6-4.6-.4-1-.3-1.9 0-2.5z"/></svg><span data-i="wa_float">וואטסאפ</span></a>
 <div class="field" data-at="work" aria-hidden="true"><canvas></canvas></div>
+<div class="meter" data-at="teaching" aria-hidden="true"><svg viewBox="0 0 122 30"><defs><linearGradient id="mfade" x1="0" x2="1"><stop offset="0" stop-color="#ffb45e" stop-opacity=".25"/><stop offset=".5" stop-color="#ffb45e"/><stop offset="1" stop-color="#ffb45e" stop-opacity=".25"/></linearGradient></defs><g fill="url(#mfade)"><rect x="0" y="12" width="3" height="6" rx="1.5"/><rect x="7" y="10" width="3" height="10" rx="1.5"/><rect x="14" y="11" width="3" height="8" rx="1.5"/><rect x="21" y="7" width="3" height="16" rx="1.5"/><rect x="28" y="9" width="3" height="12" rx="1.5"/><rect x="35" y="4" width="3" height="22" rx="1.5"/><rect x="42" y="6" width="3" height="18" rx="1.5"/><rect x="49" y="1" width="3" height="28" rx="1.5"/><rect x="56" y="5" width="3" height="20" rx="1.5"/><rect x="63" y="2" width="3" height="26" rx="1.5"/><rect x="70" y="7" width="3" height="16" rx="1.5"/><rect x="77" y="4" width="3" height="22" rx="1.5"/><rect x="84" y="9" width="3" height="12" rx="1.5"/><rect x="91" y="6" width="3" height="18" rx="1.5"/><rect x="98" y="11" width="3" height="8" rx="1.5"/><rect x="105" y="9" width="3" height="12" rx="1.5"/><rect x="112" y="12" width="3" height="6" rx="1.5"/><rect x="119" y="13" width="3" height="4" rx="1.5"/></g></svg></div>
 <div class="rings-field" data-at="contact" aria-hidden="true"><i class="core"></i><i class="rings"></i><u></u><u class="two"></u></div>
 <header class="top">
   <div class="wrap">
@@ -373,7 +378,7 @@ footer a:hover{color:var(--amber)}
   var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,last=1;
   size();frame(last);
   if('ResizeObserver' in window)new ResizeObserver(function(){size();frame(last)}).observe(cv);
-  if(!still){(function loop(ts){last=1+ts/2000;frame(last);   /* half speed; still starts from the same first ridge at t=1 */requestAnimationFrame(loop);})(0);}
+  if(!still){(function loop(ts){last=1+ts/3500;frame(last);   /* slowed to about 30% of the original; still starts from the same first ridge at t=1 */requestAnimationFrame(loop);})(0);}
 
   /* language */
   var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
