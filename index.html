@@ -140,9 +140,9 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,5.4vw,56px);l
 .tools .d{display:block;color:var(--dust);font-size:13px;line-height:1.5}
 
 /* contact */
-.contact{background:var(--haze);border-radius:28px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;isolation:isolate}
-.contact::before{content:"";position:absolute;z-index:-1;inset:auto -20% -60% auto;width:70%;height:120%;
-  background:radial-gradient(circle,color-mix(in srgb,var(--amber) 14%,transparent),transparent 65%)}
+/* the warm corner glow is part of the card's own background, so it fades out smoothly with no cut edge */
+.contact{border-radius:28px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;isolation:isolate;
+  background:radial-gradient(ellipse 65% 75% at 88% 105%,color-mix(in srgb,var(--amber) 13%,transparent),transparent 72%),var(--haze)}
 form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:720px}
 .full{grid-column:1/-1}
 @media (max-width:600px){form{grid-template-columns:1fr}}
@@ -242,17 +242,16 @@ footer a:hover{color:var(--amber)}
         <a class="btn line" href="#services" data-i="cta2">מה אני עושה</a>
       </div>
     </div>
+    <div class="wrap">
+      <figure class="shot"><img src="dino-console.jpg" width="1076" height="880" alt="דין שגב מאחורי קונסולת הסאונד בהופעה חיה" decoding="async"><figcaption data-i="shot">FOH · הופעה חיה</figcaption></figure>
+      <div class="credits">
+        <p class="credits-h" data-i="cr_h">מאחורי הקונסולה של הגדולים</p>
+        <p data-i="cr_p">עבדתי עם האמנים המובילים בישראל ובהפקות הגדולות בארץ.</p>
+        <a id="creditsLink" href="https://wa.me/972547777223" target="_blank" rel="noopener" data-i="cr_a">אשמח לספר באופן אישי בשיחה</a>
+      </div>
+    </div>
     <canvas id="wave" aria-hidden="true"></canvas>
   </section>
-
-  <div class="wrap">
-    <figure class="shot"><img src="dino-console.jpg" width="1076" height="880" alt="דין שגב מאחורי קונסולת הסאונד בהופעה חיה" decoding="async"><figcaption data-i="shot">FOH · הופעה חיה</figcaption></figure>
-    <div class="credits">
-      <p class="credits-h" data-i="cr_h">מאחורי הקונסולה של הגדולים</p>
-      <p data-i="cr_p">עבדתי עם האמנים המובילים בישראל ובהפקות הגדולות בארץ.</p>
-      <a id="creditsLink" href="https://wa.me/972547777223" target="_blank" rel="noopener" data-i="cr_a">אשמח לספר באופן אישי בשיחה</a>
-    </div>
-  </div>
 
   <section class="sec" id="services">
     <div class="wrap">
