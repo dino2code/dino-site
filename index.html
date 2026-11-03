@@ -190,6 +190,13 @@ footer a:hover{color:var(--amber)}
 .shot figcaption{position:absolute;z-index:2;bottom:18px;inset-inline-start:18px;padding:5px 14px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--paper);background:color-mix(in srgb,var(--night) 70%,transparent);border:1px solid color-mix(in srgb,var(--amber) 45%,transparent);backdrop-filter:blur(6px)}
 @media (max-width:720px){.shot{aspect-ratio:4/3;margin-top:24px;border-radius:14px}.shot figcaption{bottom:12px;inset-inline-start:12px;font-size:13px}}
 
+/* credits teaser under the photo: no names, an invitation to ask */
+.credits{max-width:560px;margin:28px auto 0;text-align:center}
+.credits-h{margin:0;font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--amber)}
+.credits p:not(.credits-h){margin:10px 0 0;color:var(--dust);text-wrap:balance}
+.credits a{display:inline-block;margin-top:10px;font-weight:600;color:var(--paper);text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:6px;transition:color .2s}
+.credits a:hover{color:var(--amber)}
+
 /* sound field: a canvas band sitting on the line where "how I work" begins (JS sets top) */
 .field{position:absolute;left:0;right:0;top:0;height:320px;margin-top:-190px;z-index:-1;pointer-events:none;overflow:hidden;
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
@@ -240,12 +247,17 @@ footer a:hover{color:var(--amber)}
 
   <div class="wrap">
     <figure class="shot"><img src="dino-console.jpg" width="1076" height="880" alt="דין שגב מאחורי קונסולת הסאונד בהופעה חיה" decoding="async"><figcaption data-i="shot">FOH · הופעה חיה</figcaption></figure>
+    <div class="credits">
+      <p class="credits-h" data-i="cr_h">מאחורי הקונסולה של הגדולים</p>
+      <p data-i="cr_p">עבדתי עם האמנים המובילים בישראל ובהפקות הגדולות בארץ.</p>
+      <a id="creditsLink" href="https://wa.me/972547777223" target="_blank" rel="noopener" data-i="cr_a">אשמח לספר באופן אישי בשיחה</a>
+    </div>
   </div>
 
   <section class="sec" id="services">
     <div class="wrap">
       <h2 data-i="s_title">מה אני מביא להפקה</h2>
-      <p class="intro" style="white-space:pre-line" data-i="s_intro">אני עובד בעמדת FOH ובעמדת מוניטורים, ומגיע לכל מופע עם הכנה מסודרת:
+      <p class="intro" style="white-space:pre-line" data-i="s_intro">אני מגיע לכל מופע עם הכנה מסודרת:
 מההיכרות האישית, Pre Production, סאונדצ'ק ועד השיר האחרון.</p>
       <div class="svc-list">
         <div class="svc"><span class="pos">FOH</span><h3 data-i="s1t">מיקס לקהל (PA)</h3><p data-i="s1p">מיקס חי לאולם, מבניית הסשן והסאונדצ'ק ועד ניהול ההופעה בזמן אמת.</p></div>
@@ -365,13 +377,14 @@ footer a:hover{color:var(--amber)}
   var EN={nav1:"Services",nav2:"How I work",nav3:"Teaching",nav4:"Contact",name:"Din Segev",
     role:"Live sound engineer. The sound the audience hears, and the sound the artist hears on stage.",
     cta1:"Check availability",cta2:"What I do",
-    s_title:"What I bring to a production",s_intro:"I work front of house and monitors, and come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song.",
+    s_title:"What I bring to a production",s_intro:"I come to every show well prepared:\nfrom getting to know you personally, through pre-production and soundcheck, to the last song.",
     s1t:"Mixing for the audience (PA)",s1p:"A live mix for the room, from building the session and soundcheck to running the show in real time.",
     s2k:"Monitors",s2t:"Stage mixes and IEMs",s2p:"Personal mixes for every player and singer, on wedges and IEMs, so everyone on stage hears exactly what they need.",
     shot:"FOH · Live show",wa_float:"WhatsApp",
+    cr_h:"Behind the console for the biggest names",cr_p:"I've worked with Israel's leading artists and on the country's biggest productions.",cr_a:"Happy to tell you more in person",
     s3k:"Vocal sound design",s3t:"Vocal sound design and effects",s3p:"Song-by-song sound design, with vocal effects the artist also hears in their IEMs on stage.",
     e_title:"How I work",e_intro:"It starts long before anyone walks on stage, with a personal connection.",
-    e1t:"Certified sound engineering technician",e1d:"Full professional training in sound engineering.",
+    e1t:"Certified Sound Engineering Technician",e1d:"Full professional training in sound engineering.",
     e2t:"Sound design for every song",e2d:"Effects, dynamics and changes planned ahead, following the setlist.",
     e3t:"Both positions",e3d:"FOH and monitors.",
     t_title:"I also teach",t_kick:"Live sound and audio",t_p:"Hands-on experience from the field, combined with clear teaching.",
@@ -393,6 +406,7 @@ footer a:hover{color:var(--amber)}
     document.documentElement.lang=l;document.documentElement.dir=l==='en'?'ltr':'rtl';
     document.querySelectorAll('[data-i]').forEach(function(el){var k=el.getAttribute('data-i');if(k in D)el.textContent=D[k];});
     document.getElementById('langBtn').textContent=l==='en'?'עברית':'English';
+    document.getElementById('creditsLink').href='https://wa.me/972547777223?text='+encodeURIComponent(l==='en'?"Hi Din, I'd love to hear who you've worked with":'היי דין, אשמח לשמוע עם מי עבדת');
     document.getElementById('waFloat').href='https://wa.me/972547777223?text='+encodeURIComponent(l==='en'?"Hi Din, I'd like to check your availability for a show":'היי דין, אשמח לבדוק זמינות למופע');
     var st=document.getElementById('formStatus');if(!st.hidden)st.textContent=D[st.dataset.k||'sent'];
   }
